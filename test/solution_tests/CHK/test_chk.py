@@ -23,10 +23,14 @@ class MyTestCase(unittest.TestCase):
     def test_special3(self):
         assert checkout("AAAABBB") == 255
 
+    def test_special4(self):
+        assert checkout("AAAAAA") == 250
+
     def test_oneoff(self):
-        assert checkout("EE") == 80
+        assert checkout("EEBB") == 110
 
 if __name__ == '__main__':
     unittest.main()
+
 
 
