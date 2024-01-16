@@ -23,9 +23,9 @@ def checkout(skus):
     group_discount1_value = 45
 
     item_count = {}
-    count_items(skus, prices, item_count)
+    success = count_items(skus, prices, item_count)
 
-    if item_count == -1:
+    if success == -1:
         # invalid input
         return -1
 
@@ -46,6 +46,7 @@ def count_items(skus, prices, item_count):
             item_count[item] += 1
         else:
             item_count[item] = 1
+    return 0
 
 # check if there is an item free offer, if so update the item count accordingly
 def check_itemsfree_offers(item_count, itemsfree_offers):
@@ -75,5 +76,6 @@ def calculate_value(item_count, prices, special_offers, itemsfree_offers):
         value += (item_count[key] * prices[key])
 
     return value
+
 
 
