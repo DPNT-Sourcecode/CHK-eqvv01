@@ -2,8 +2,11 @@ import unittest
 from lib.solutions.CHK.checkout_solution import checkout
 
 class MyTestCase(unittest.TestCase):
-    def test_regular(self):
+    def test_regular1(self):
         assert checkout("ABCD") == 115
+
+    def test_regular2(self):
+        assert checkout("UVPK") == 220
 
     def test_empty(self):
         assert checkout("") == 0
@@ -29,6 +32,12 @@ class MyTestCase(unittest.TestCase):
     def test_special5(self):
         assert checkout("AAAAAAAA") == 330
 
+    def test_special6(self):
+        assert checkout("LMMNNN") == 225
+
+    # def test_special7(self):
+    #     assert checkout("LMMNNN") == 225
+
     def test_oneoff1(self):
         assert checkout("EEBB") == 110
 
@@ -40,4 +49,5 @@ class MyTestCase(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
 
