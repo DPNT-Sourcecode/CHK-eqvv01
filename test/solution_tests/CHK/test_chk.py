@@ -6,7 +6,7 @@ class MyTestCase(unittest.TestCase):
         assert checkout("ABCD") == 115
 
     def test_regular2(self):
-        assert checkout("UVPK") == 220
+        assert checkout("UVPK") == 210
 
     def test_empty(self):
         assert checkout("") == 0
@@ -46,6 +46,9 @@ class MyTestCase(unittest.TestCase):
 
     def test_oneoff2(self):
         assert checkout("FFFFFF") == 40
+
+    def test_group_discount(self):
+        assert checkout("STXYZ") == 82
 
 if __name__ == '__main__':
     unittest.main()
