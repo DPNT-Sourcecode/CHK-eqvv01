@@ -7,7 +7,7 @@ def checkout(skus):
     special_offers = {'A': [3, 130], 'B': [2, 45]}
     item_count = count_items(skus, prices)
     checkout_value = calculate_value(item_count, prices, special_offers)
-    return checkout_value
+    return item_count
 
 
 def count_items(skus, prices):
@@ -21,7 +21,9 @@ def count_items(skus, prices):
         if item in quantities:
             quantities[item] += 1
         else:
-            quantities[item] = 0
+            quantities[item] = 1
+
+    return quantities
 
 
 def calculate_value(item_count, prices, special_offers):
@@ -34,4 +36,5 @@ def calculate_value(item_count, prices, special_offers):
         value += (item_count[key] * prices[key])
 
     return value
+
 
