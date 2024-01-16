@@ -19,7 +19,8 @@ def checkout(skus):
         'N': [3, 3, {'M': 1}], 'R': [3, 3, {'Q': 1}],
         'U': [4, 3, {'U': 1}]
     }
-    group_discount = {['S', 'T']}
+    group_discount1_items = ['S', 'T', 'X', 'Y', 'Z']
+    group_discount1_value = 45
 
     item_count = count_items(skus, prices)
 
@@ -48,9 +49,7 @@ def count_items(skus, prices):
     return quantities
 
 
-def calculate_value(item_count, prices, special_offers, itemsfree_offers):
-
-    # check if there is an item free offer, if so update the item count accordingly
+def check_itemsfree_offers(item_count, itemsfree_offers):
     for itemkey in item_count:
         if itemkey in itemsfree_offers:
 
@@ -64,6 +63,12 @@ def calculate_value(item_count, prices, special_offers, itemsfree_offers):
                         item_count[offerkey] -= value
                 temp_item_count -= subtract_offer_items
 
+
+def calculate_value(item_count, prices, special_offers, itemsfree_offers):
+
+    # check if there is an item free offer, if so update the item count accordingly
+
+
     value = 0
     for key in item_count:
         if key in special_offers:
@@ -74,3 +79,4 @@ def calculate_value(item_count, prices, special_offers, itemsfree_offers):
         value += (item_count[key] * prices[key])
 
     return value
+
