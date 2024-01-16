@@ -22,18 +22,19 @@ def checkout(skus):
     group_discount1_items = ['S', 'T', 'X', 'Y', 'Z']
     group_discount1_value = 45
 
-    item_count = count_items(skus, prices)
+    item_count = {}
+    count_items(skus, prices, item_count)
 
     if item_count == -1:
         # invalid input
         return -1
 
+    check_itemsfree_offers(item_count, itemsfree_offers)
     checkout_value = calculate_value(item_count, prices, special_offers, itemsfree_offers)
     return checkout_value
 
 
-def count_items(skus, prices):
-    quantities = {}
+def count_items(skus, prices, item_count):
     for item in skus:
 
         if item not in prices:
@@ -41,14 +42,12 @@ def count_items(skus, prices):
             return -1
 
         # update item count
-        if item in quantities:
-            quantities[item] += 1
+        if item in item_count:
+            item_count[item] += 1
         else:
-            quantities[item] = 1
+            item_count[item] = 1
 
-    return quantities
-
-
+# check if there is an item free offer, if so update the item count accordingly
 def check_itemsfree_offers(item_count, itemsfree_offers):
     for itemkey in item_count:
         if itemkey in itemsfree_offers:
@@ -66,9 +65,6 @@ def check_itemsfree_offers(item_count, itemsfree_offers):
 
 def calculate_value(item_count, prices, special_offers, itemsfree_offers):
 
-    # check if there is an item free offer, if so update the item count accordingly
-
-
     value = 0
     for key in item_count:
         if key in special_offers:
@@ -79,4 +75,5 @@ def calculate_value(item_count, prices, special_offers, itemsfree_offers):
         value += (item_count[key] * prices[key])
 
     return value
+
 
