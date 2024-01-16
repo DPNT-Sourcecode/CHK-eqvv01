@@ -24,8 +24,9 @@ class MyTestCase(unittest.TestCase):
         assert checkout("AAAABBB") == 255
 
     def test_oneoff(self):
-        assert checkout("E") == 255
+        assert checkout("EE") == 80
 
 if __name__ == '__main__':
     unittest.main()
+
 

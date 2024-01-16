@@ -38,10 +38,12 @@ def calculate_value(item_count, prices, special_offers, itemsfree_offers):
     # check if there is an item free offer, if so update the item count accordingly
     for itemkey in item_count:
         if itemkey in itemsfree_offers:
+            temp_item_count = item_count[itemkey]
             while itemsfree_offers[itemkey][0] <= item_count[itemkey]:
                 for offerkey, value in itemsfree_offers[itemkey][1].items():
-                    item_count[offerkey] -= value
-                item_count[itemkey] -= itemsfree_offers[itemkey][0]
+                    if offerkey in item_count:
+                        item_count[offerkey] -= value
+                temp_item_count -= itemsfree_offers[itemkey][0]
 
     print(item_count)
 
@@ -55,3 +57,4 @@ def calculate_value(item_count, prices, special_offers, itemsfree_offers):
         value += (item_count[key] * prices[key])
 
     return value
+
