@@ -26,4 +26,5 @@ def calculate_value(item_count, prices, special_offers):
     for key in item_count:
         if key in special_offers:
             if special_offers[key][0] <= item_count[key]:
+                value += special_offers[key][1]
                 item_count[key] -= special_offers[key][0]
