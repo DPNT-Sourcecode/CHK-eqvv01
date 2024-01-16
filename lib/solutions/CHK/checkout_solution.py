@@ -3,9 +3,9 @@
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
-    prices = {'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40}
+    prices = {'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40, 'F': 10}
     special_offers = {'A': [[5, 200], [3, 130]], 'B': [[2, 45]]}
-    itemsfree_offers = {'E': [2, 2, {'B': 1}]}
+    itemsfree_offers = {'E': [2, 2, {'B': 1}], 'F': [3, 1, {'F': 1}]}
     item_count = count_items(skus, prices)
 
     if item_count == -1:
@@ -38,9 +38,11 @@ def calculate_value(item_count, prices, special_offers, itemsfree_offers):
     # check if there is an item free offer, if so update the item count accordingly
     for itemkey in item_count:
         if itemkey in itemsfree_offers:
+
             temp_item_count = item_count[itemkey]
-            min_offer_items = itemsfree_offers[itemkey][0]
-            subtract_offer_items = itemsfree_offers[itemkey][1]
+            min_offer_items = itemsfree_offers[itemkey][0]  # min no. of items needed in basket for offer
+            subtract_offer_items = itemsfree_offers[itemkey][1]  # used to see how many times to apply the offer
+
             while min_offer_items <= temp_item_count:
                 for offerkey, value in itemsfree_offers[itemkey][2].items():
                     if offerkey in item_count:
@@ -57,7 +59,3 @@ def calculate_value(item_count, prices, special_offers, itemsfree_offers):
         value += (item_count[key] * prices[key])
 
     return value
-
-
-
-
