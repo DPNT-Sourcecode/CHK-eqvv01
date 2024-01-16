@@ -13,12 +13,14 @@ def checkout(skus):
 def count_items(skus, prices):
     quantities = {}
     for item in skus:
+
         if item not in prices:
             # invalid input
             return -1
 
         # update item count
         if item in quantities:
+            print(item)
             quantities[item] += 1
         else:
             quantities[item] = 1
@@ -36,5 +38,6 @@ def calculate_value(item_count, prices, special_offers):
         value += (item_count[key] * prices[key])
 
     return value
+
 
 
