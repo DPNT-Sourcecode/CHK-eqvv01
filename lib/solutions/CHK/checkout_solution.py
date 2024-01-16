@@ -19,6 +19,8 @@ def checkout(skus):
         'N': [3, 3, {'M': 1}], 'R': [3, 3, {'Q': 1}],
         'U': [4, 3, {'U': 1}]
     }
+    group_discount = {['S', 'T']}
+
     item_count = count_items(skus, prices)
 
     if item_count == -1:
