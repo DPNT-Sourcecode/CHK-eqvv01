@@ -23,6 +23,7 @@ def count_items(skus, prices):
 
 def calculate_value(item_count, prices, special_offers):
     value = 0
-    for key, value in item_count.items():
+    for key in item_count:
         if key in special_offers:
-            if special_offers[key]
+            if special_offers[key][0] <= item_count[key]:
+                item_count[key] -= special_offers[key][0]
