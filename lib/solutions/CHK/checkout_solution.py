@@ -5,7 +5,7 @@
 def checkout(skus):
     prices = {'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40, 'F': 10}
     special_offers = {'A': [[5, 200], [3, 130]], 'B': [[2, 45]]}
-    itemsfree_offers = {'E': [2, 2, {'B': 1}], 'F': [3, 1, {'F': 1}]}
+    itemsfree_offers = {'E': [2, 2, {'B': 1}], 'F': [3, 2, {'F': 1}]}
     item_count = count_items(skus, prices)
 
     if item_count == -1:

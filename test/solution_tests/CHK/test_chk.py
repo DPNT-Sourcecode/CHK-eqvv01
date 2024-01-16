@@ -36,7 +36,8 @@ class MyTestCase(unittest.TestCase):
         assert checkout("FFF") == 20
 
     def test_oneoff2(self):
-        assert checkout("FFFFFF") == 30
+        assert checkout("FFFFFF") == 40
 
 if __name__ == '__main__':
     unittest.main()
+
