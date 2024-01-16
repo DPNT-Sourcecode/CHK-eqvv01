@@ -1,26 +1,24 @@
 
-
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
     prices = {
         'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40, 'F': 10,
-        'G': 20, 'H': 10, 'I': 35, 'J': 60, 'K': 80, 'L': 90,
+        'G': 20, 'H': 10, 'I': 35, 'J': 60, 'K': 70, 'L': 90,
         'M': 15, 'N': 40, 'O': 10, 'P': 50, 'Q': 30, 'R': 50,
-        'S': 30, 'T': 20, 'U': 40, 'V': 50, 'W': 20, 'X': 90,
-        'Y': 10, 'Z': 50
+        'S': 20, 'T': 20, 'U': 40, 'V': 50, 'W': 20, 'X': 17,
+        'Y': 20, 'Z': 21
     }
     special_offers = {
         'A': [[5, 200], [3, 130]], 'B': [[2, 45]], 'H': [[10, 80], [5, 45]],
-        'K': [[2, 150]], 'P': [[5, 200]], 'Q': [[3, 80]], 'V': [[3, 130], [2, 90]]
+        'K': [[2, 120]], 'P': [[5, 200]], 'Q': [[3, 80]], 'V': [[3, 130], [2, 90]]
     }
     itemsfree_offers = {
         'E': [2, 2, {'B': 1}], 'F': [3, 2, {'F': 1}],
         'N': [3, 3, {'M': 1}], 'R': [3, 3, {'Q': 1}],
         'U': [4, 3, {'U': 1}]
     }
-    group_discount1_items = ['S', 'T', 'X', 'Y', 'Z']
-    group_discount1_value = 45
+    group_discount_items = [['Z', 'T', 'S', 'Y', 'X'], 45]
 
     item_count = {}
     success = count_items(skus, prices, item_count)
@@ -30,8 +28,8 @@ def checkout(skus):
         return -1
 
     check_itemsfree_offers(item_count, itemsfree_offers)
-    checkout_value = calculate_value(item_count, prices, special_offers, itemsfree_offers)
-    return checkout_value
+    value = check_group_discount(item_count, group_discount_items)
+    return calculate_value(value, item_count, prices, special_offers)
 
 
 def count_items(skus, prices, item_count):
@@ -63,10 +61,20 @@ def check_itemsfree_offers(item_count, itemsfree_offers):
                         item_count[offerkey] -= value
                 temp_item_count -= subtract_offer_items
 
+def check_group_discount(item_count, group_discount):
+    group = []
+    for item in group_discount[0]:
+        if item in item_count:
+            group.append(item)
 
-def calculate_value(item_count, prices, special_offers, itemsfree_offers):
+    if len(group) < 3:
+        return 0
+    else:
+        for item in group[:3]:
+            item_count[item] -= 1
+        return group_discount[1]
 
-    value = 0
+def calculate_value(value, item_count, prices, special_offers):
     for key in item_count:
         if key in special_offers:
             for offer in special_offers[key]:
@@ -76,6 +84,7 @@ def calculate_value(item_count, prices, special_offers, itemsfree_offers):
         value += (item_count[key] * prices[key])
 
     return value
+
 
 
 
