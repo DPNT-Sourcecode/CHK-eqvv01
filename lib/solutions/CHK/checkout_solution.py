@@ -20,7 +20,6 @@ def count_items(skus, prices):
 
         # update item count
         if item in quantities:
-            print(quantities[item])
             quantities[item] += 1
         else:
             quantities[item] = 1
@@ -38,6 +37,7 @@ def calculate_value(item_count, prices, special_offers):
         value += (item_count[key] * prices[key])
 
     return value
+
 
 
 
