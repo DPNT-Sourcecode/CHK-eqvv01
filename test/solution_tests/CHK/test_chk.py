@@ -47,8 +47,19 @@ class MyTestCase(unittest.TestCase):
     def test_oneoff2(self):
         assert checkout("FFFFFF") == 40
 
-    def test_group_discount(self):
+    def test_group_discount1(self):
         assert checkout("STXYZ") == 82
+
+    def test_group_discount2(self):
+        assert checkout("STXSTX") == 90
+
+    def test_group_discount3(self):
+        assert checkout("SSS") == 45
+
+    def test_group_discount3(self):
+        assert checkout("SSSZ") == 65
+
 
 if __name__ == '__main__':
     unittest.main()
+
