@@ -63,17 +63,19 @@ def check_itemsfree_offers(item_count, itemsfree_offers):
 
 # check for the group discount, update item count and value accordingly
 def check_group_discount(item_count, group_discount):
+    discount = 0
     group = ""
     for item in group_discount[0]:
         if item in item_count:
             group += (item * item_count[item])
 
-    if len(group) < 3:
-        return 0
-    else:
-        for item in group[:3]:
-            item_count[item] -= 1
-        return group_discount[1]
+    while len(group) >= 3:
+        for x in range(3):
+            item_count[group[x]] -= 1
+        group = group[3:]
+        discount += 45
+
+    return discount
 
 
 # final calculation of checkout value
@@ -87,4 +89,5 @@ def calculate_value(value, item_count, prices, special_offers):
         value += (item_count[key] * prices[key])
 
     return value
+
 
