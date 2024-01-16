@@ -5,7 +5,7 @@
 def checkout(skus):
     prices = {'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40}
     special_offers = {'A': [[5, 200], [3, 130]], 'B': [[2, 45]]}
-    itemsfree_offers = {'E': [2, {'B': 1}]}
+    itemsfree_offers = {'E': [2, 2, {'B': 1}]}
     item_count = count_items(skus, prices)
 
     if item_count == -1:
@@ -39,11 +39,13 @@ def calculate_value(item_count, prices, special_offers, itemsfree_offers):
     for itemkey in item_count:
         if itemkey in itemsfree_offers:
             temp_item_count = item_count[itemkey]
-            while itemsfree_offers[itemkey][0] <= temp_item_count:
-                for offerkey, value in itemsfree_offers[itemkey][1].items():
+            min_offer_items = itemsfree_offers[itemkey][0]
+            subtract_offer_items = itemsfree_offers[itemkey][1]
+            while min_offer_items <= temp_item_count:
+                for offerkey, value in itemsfree_offers[itemkey][2].items():
                     if offerkey in item_count:
                         item_count[offerkey] -= value
-                temp_item_count -= itemsfree_offers[itemkey][0]
+                temp_item_count -= subtract_offer_items
 
     value = 0
     for key in item_count:
@@ -55,6 +57,7 @@ def calculate_value(item_count, prices, special_offers, itemsfree_offers):
         value += (item_count[key] * prices[key])
 
     return value
+
 
 
 
