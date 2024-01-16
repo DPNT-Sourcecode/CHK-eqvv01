@@ -3,9 +3,9 @@
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
-    prices = {'A': 50, 'B': 30, 'C': 20, 'D': 15}
+    prices = {'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40}
     special_offers = {'A': [[5, 200], [3, 130]], 'B': [[2, 45]]}
-    itemsfree_offers = {'E': {'B': 1}}
+    itemsfree_offers = {'E': [2, {'B': 1}]}
     item_count = count_items(skus, prices)
 
     if item_count == -1:
@@ -38,8 +38,10 @@ def calculate_value(item_count, prices, special_offers, itemsfree_offers):
     # check if there is an item free offer, if so update the item count accordingly
     for itemkey in item_count:
         if itemkey in itemsfree_offers:
-            for offerkey, value in itemsfree_offers[itemkey].items():
-                item_count[offerkey] -= value
+            while itemsfree_offers[itemkey][0] <= item_count[itemkey]:
+                for offerkey, value in itemsfree_offers[itemkey][1].items():
+                    item_count[offerkey] -= value
+                item_count[itemkey] -= itemsfree_offers[itemkey][0]
 
     print(item_count)
 

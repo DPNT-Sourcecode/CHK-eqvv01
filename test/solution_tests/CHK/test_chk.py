@@ -23,5 +23,9 @@ class MyTestCase(unittest.TestCase):
     def test_special3(self):
         assert checkout("AAAABBB") == 255
 
+    def test_oneoff(self):
+        assert checkout("E") == 255
+
 if __name__ == '__main__':
     unittest.main()
+
